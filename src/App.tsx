@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import ServicesSection from "./components/ServicesSection";
 import StatsSection from "./components/StatsSection";
 import HowItWorksSection from "./components/HowItWorksSection";
+import CommitmentSection from "./components/CommitmentSection";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <ServicesSection />
       <StatsSection />
       <HowItWorksSection />
+      <CommitmentSection />
     </div>
   );
 };
