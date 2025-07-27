@@ -9,6 +9,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
+import nextDeskLogo from "@/assets/nextdesk-blue.png";
 
 const Footer = () => {
   const footerSections = [
@@ -62,8 +63,8 @@ const Footer = () => {
               className="flex items-center space-x-2 group"
               aria-label="NextDesk Home"
             >
-              <div className="w-10 h-10 bg-gradient-to-r from-primary to-primary-glow rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                <Film className="w-6 h-6 text-white" />
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
+                <img src={nextDeskLogo} alt="NextDesk Logo" className="w-7 h-7 object-contain" />
               </div>
               <span className="text-2xl font-bold tracking-wide">NextDesk</span>
             </a>
