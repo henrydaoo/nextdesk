@@ -24,18 +24,15 @@ const HeroSection = () => {
 
   const heroSlides = [
     {
-      image:
-        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80",
+      image: "/next-15.png",
       alt: "Modern coworking lounge with people collaborating",
     },
     {
-      image:
-        "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
+      image: "/next-14.png",
       alt: "Open workspace with natural light and desks",
     },
     {
-      image:
-        "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80",
+      image: "/next-13.png",
       alt: "Team brainstorming in a meeting room",
     },
   ];
@@ -85,7 +82,7 @@ const HeroSection = () => {
           className={`relative fade-in ${isVisible ? "visible" : ""}`}
           style={{ animationDelay: "200ms" }}
         >
-          <Carousel className="w-full max-w-5xl mx-auto">
+          <Carousel className="w-full max-w-5xl mx-auto" >
             <CarouselContent>
               {heroSlides.map((slide, index) => (
                 <CarouselItem key={index}>
