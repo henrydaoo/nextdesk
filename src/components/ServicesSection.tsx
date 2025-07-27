@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
   Film,
   User,
@@ -9,8 +9,10 @@ import {
   Building2,
   Mountain,
   Glasses,
-  Sparkles
-} from 'lucide-react';
+  Sparkles,
+  Users,
+  Coffee,
+} from "lucide-react";
 
 const ServicesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +27,7 @@ const ServicesSection = () => {
       { threshold: 0.1 }
     );
 
-    const element = document.getElementById('services');
+    const element = document.getElementById("services");
     if (element) observer.observe(element);
 
     return () => observer.disconnect();
@@ -33,51 +35,59 @@ const ServicesSection = () => {
 
   const services = [
     {
-      title: "Flexible Desks",
-      icon: User,
-      description: "Choose any open seat in our vibrant shared workspace. Perfect for freelancers and remote workers.",
+      title: "Flexible Hot Desks",
+      icon: Users,
+      description:
+        "Access shared workspaces and choose any open seat. Ideal for daily productivity and networking.",
       featured: true,
     },
     {
-      title: "Private Offices",
+      title: "Dedicated Private Offices",
       icon: Building2,
-      description: "Fully furnished private offices for teams and startups seeking focus and privacy.",
+      description:
+        "Secure, fully furnished offices for teams needing privacy and a permanent base.",
       featured: false,
     },
     {
-      title: "Meeting Rooms",
+      title: "Modern Meeting Rooms",
       icon: Sparkles,
-      description: "Book modern meeting rooms with AV equipment for your next brainstorm or client pitch.",
+      description:
+        "Equipped with advanced AV, perfect for presentations, client meetings, or team brainstorms.",
       featured: false,
     },
     {
-      title: "Event Space",
+      title: "Versatile Event Spaces",
       icon: Lightbulb,
-      description: "Host workshops, networking events, or launches in our spacious event area.",
+      description:
+        "Host workshops, seminars, or corporate gatherings in our adaptable event areas.",
       featured: false,
     },
     {
-      title: "High-Speed Wi-Fi",
+      title: "Blazing Fast Wi-Fi",
       icon: Glasses,
-      description: "Reliable, fast internet throughout the space—stay connected and productive.",
+      description:
+        "Stay connected with high-speed, reliable internet across all our locations.",
       featured: false,
     },
     {
-      title: "Pantry & Coffee Bar",
-      icon: Mountain,
-      description: "Unlimited coffee, tea, and snacks in our cozy kitchen and lounge area.",
+      title: "Gourmet Coffee & Snacks",
+      icon: Coffee,
+      description:
+        "Enjoy unlimited premium coffee, tea, and a selection of healthy snacks.",
       featured: false,
     },
     {
-      title: "Printing & Office Supplies",
+      title: "Professional Printing & Supplies",
       icon: Film,
-      description: "Access printers, scanners, and all the essentials for your daily workflow.",
+      description:
+        "Convenient access to printing, scanning, and essential office supplies.",
       featured: false,
     },
     {
-      title: "Community Events",
+      title: "Engaging Community Events",
       icon: Gamepad2,
-      description: "Join regular workshops, talks, and networking sessions to grow your network.",
+      description:
+        "Participate in exclusive workshops, networking mixers, and social gatherings.",
       featured: false,
     },
   ];
@@ -85,8 +95,9 @@ const ServicesSection = () => {
   return (
     <section id="services" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className={`text-center mb-16 fade-in ${isVisible ? 'visible' : ''}`}> 
+        <div
+          className={`text-center mb-16 fade-in ${isVisible ? "visible" : ""}`}
+        >
           <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             Our Amenities
           </span>
@@ -94,40 +105,40 @@ const ServicesSection = () => {
             Everything You Need to Work and Thrive
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover flexible workspaces, premium facilities, and a supportive community at NextDesk.
+            From flexible desks to private offices, we provide a comprehensive
+            suite of amenities designed to elevate your work experience.
           </p>
         </div>
 
-        {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <Card
               key={index}
               className={`p-6 hover-lift transition-all duration-300 cursor-pointer fade-in ${
-                isVisible ? 'visible' : ''
+                isVisible ? "visible" : ""
               } ${
-                service.featured 
-                  ? 'bg-primary/10 border border-primary text-primary' 
-                  : 'bg-white hover:shadow-lg'
+                service.featured
+                  ? "bg-primary/10 border border-primary text-primary"
+                  : "bg-white hover:shadow-lg"
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-primary/10">
                 <service.icon className="w-7 h-7 text-primary" />
               </div>
-              
+
               <h3 className="text-xl font-semibold mb-3 text-foreground">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground">
-                {service.description}
-              </p>
+              <p className="text-muted-foreground">{service.description}</p>
             </Card>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className={`text-center mt-12 fade-in ${isVisible ? 'visible' : ''}`} style={{ animationDelay: '600ms' }}>
+        <div
+          className={`text-center mt-12 fade-in ${isVisible ? "visible" : ""}`}
+          style={{ animationDelay: "600ms" }}
+        >
           <Button size="lg" className="hover-scale">
             Book Your Desk
           </Button>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Film, Phone } from "lucide-react";
+import nextDeskLogo from "@/assets/nextdesk-blue.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const Header = () => {
           >
             <div className="absolute -left-2 -top-2 w-8 h-8 bg-primary/10 blur-md rounded-full opacity-60 z-0" />
             <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform relative z-10">
-              <Film className="w-6 h-6 text-primary" />
+              <img src={nextDeskLogo} alt="NextDesk Logo" className="w-7 h-7 object-contain" />
             </div>
             <span className="text-2xl font-bold text-foreground tracking-wide ml-1">
               NextDesk

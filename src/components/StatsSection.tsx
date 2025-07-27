@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Users, Building2, UserCheck, Coffee } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useEffect, useState } from "react";
+import { Users, Building2, UserCheck, Coffee } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const StatsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -22,7 +22,7 @@ const StatsSection = () => {
       { threshold: 0.1 }
     );
 
-    const element = document.getElementById('stats');
+    const element = document.getElementById("stats");
     if (element) observer.observe(element);
 
     return () => observer.disconnect();
@@ -50,7 +50,7 @@ const StatsSection = () => {
           current = target;
           clearInterval(intervals[key]);
         }
-        setCounts(prev => ({ ...prev, [key]: Math.floor(current) }));
+        setCounts((prev) => ({ ...prev, [key]: Math.floor(current) }));
       }, 50);
     });
   };
@@ -59,38 +59,43 @@ const StatsSection = () => {
     {
       icon: Users,
       value: counts.members,
-      suffix: '+',
-      label: 'Active Members',
+      suffix: "+",
+      label: "Thriving Members",
     },
     {
       icon: Building2,
       value: counts.locations,
-      suffix: '+',
-      label: 'Locations',
+      suffix: "+",
+      label: "Prime Locations",
     },
     {
       icon: Coffee,
       value: counts.events,
-      suffix: '+',
-      label: 'Community Events',
+      suffix: "+",
+      label: "Engaging Events",
     },
     {
       icon: UserCheck,
       value: counts.satisfaction,
-      suffix: '%',
-      label: 'Satisfaction Rate',
+      suffix: "%",
+      label: "Member Satisfaction",
     },
   ];
 
   return (
-    <section id="stats" className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+    <section
+      id="stats"
+      className="py-20 bg-gradient-to-br from-slate-50 to-blue-50"
+    >
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-12 fade-in ${isVisible ? 'visible' : ''}`}> 
+        <div
+          className={`text-center mb-12 fade-in ${isVisible ? "visible" : ""}`}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Our Community in Numbers
+            Our Impact in Numbers
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            See how our community is growing every day.
+            Discover the scale and success of the NextDesk community.
           </p>
         </div>
 
@@ -99,7 +104,7 @@ const StatsSection = () => {
             <div
               key={index}
               className={`text-center p-6 bg-white/60 shadow-md rounded-2xl hover-lift fade-in ${
-                isVisible ? 'visible' : ''
+                isVisible ? "visible" : ""
               }`}
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -107,14 +112,18 @@ const StatsSection = () => {
                 <stat.icon className="w-6 h-6 text-primary" />
               </div>
               <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                {stat.value.toLocaleString()}{stat.suffix}
+                {stat.value.toLocaleString()}
+                {stat.suffix}
               </div>
               <div className="text-muted-foreground text-sm">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        <div className={`text-center fade-in ${isVisible ? 'visible' : ''}`} style={{ animationDelay: '400ms' }}>
+        <div
+          className={`text-center fade-in ${isVisible ? "visible" : ""}`}
+          style={{ animationDelay: "400ms" }}
+        >
           <Button
             size="lg"
             variant="outline"
