@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel";
 import { Play, Users, Building2, UserCheck } from "lucide-react";
 import { Button } from "./ui/button";
+import { openTidioChat } from "@/lib/openTidioChat";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -66,8 +67,8 @@ const HeroSection = () => {
           </h2>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="hover-scale">
-              Book a Tour
+            <Button size="lg" className="hover-scale" onClick={openTidioChat}>
+              Join Now
             </Button>
             <Button
               variant="outline"

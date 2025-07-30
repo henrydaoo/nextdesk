@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { openTidioChat } from "@/lib/openTidioChat";
 import { Users, Building2, UserCheck, Coffee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -128,8 +129,9 @@ const StatsSection = () => {
             size="lg"
             variant="outline"
             className="hover-scale border-primary text-primary px-8 py-4 text-lg font-semibold rounded-full"
+            onClick={openTidioChat}
           >
-            Join the Community
+            Join Us Now
           </Button>
           <div className="text-muted-foreground mt-4">
             Become a part of NextDesk and unlock your potential.

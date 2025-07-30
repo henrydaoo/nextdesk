@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { scrollToSection } from "@/lib/scrollToSection";
 import { Button } from "@/components/ui/button";
+import { openTidioChat } from "@/lib/openTidioChat";
 import { Menu, X, Film, Phone } from "lucide-react";
 import nextDeskLogo from "@/assets/nextdesk-blue.png";
 
@@ -66,6 +67,7 @@ const Header = () => {
             <Button
               variant="default"
               className="hover-scale font-semibold px-6 py-2 rounded-full"
+              onClick={openTidioChat}
             >
               <Film size={16} className="mr-2" />
               Join Now
@@ -98,7 +100,7 @@ const Header = () => {
                   <Phone size={16} />
                   <span>Hotline: (555) 123-4567</span>
                 </div>
-                <Button variant="default" className="w-full">
+                <Button variant="default" className="w-full" onClick={openTidioChat}>
                   <Film size={16} className="mr-2" />
                   Join Now
                 </Button>

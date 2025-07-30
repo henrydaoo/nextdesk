@@ -13,6 +13,7 @@ import {
   Users,
   Coffee,
 } from "lucide-react";
+import { openTidioChat } from "@/lib/openTidioChat";
 
 const ServicesSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -139,8 +140,8 @@ const ServicesSection = () => {
           className={`text-center mt-12 fade-in ${isVisible ? "visible" : ""}`}
           style={{ animationDelay: "600ms" }}
         >
-          <Button size="lg" className="hover-scale">
-            Book Your Desk
+          <Button size="lg" className="hover-scale" onClick={openTidioChat}>
+            Join Now
           </Button>
         </div>
       </div>

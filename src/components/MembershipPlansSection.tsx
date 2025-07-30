@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "./ui/card";
 import { CheckCircle } from "lucide-react";
 import { Button } from "./ui/button";
+import { openTidioChat } from "@/lib/openTidioChat";
 
 const MembershipPlansSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -160,6 +161,7 @@ const MembershipPlansSection = () => {
                     : ""
                 }`}
                 size="lg"
+                onClick={openTidioChat}
               >
                 Choose Plan
               </Button>
