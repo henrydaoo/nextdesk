@@ -110,7 +110,7 @@ const HowItWorksSection = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-blue-200/10 to-transparent rounded-3xl z-10 pointer-events-none" />
               <img
-                src="/next-5.png"
+                src="/next-5.webp"
                 alt="Coworking space tour"
                 className="w-full h-[500px] object-cover rounded-3xl shadow-xl border-4 border-primary/10"
               />
