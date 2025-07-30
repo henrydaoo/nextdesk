@@ -20,18 +20,18 @@ const GallerySection = () => {
   }, []);
 
   const images = [
-    { src: "/next-1.png", alt: "Open workspace with natural light" },
-    { src: "/next-12.png", alt: "Private meeting room" },
-    { src: "/next-2.png", alt: "Team collaboration area" },
-    { src: "/next-4.png", alt: "Shared working space" },
-    { src: "/next-7.png", alt: "Lounge area" },
-    { src: "/next-8.png", alt: "Personal desk setup" },
-    { src: "/next-9.png", alt: "Networking event" },
-    { src: "/next-10.png", alt: "Bright office environment" },
-    { src: "/next-3.png", alt: "Modern office interior" },
-    { src: "/next-14.png", alt: "Breakout zone" },
-    { src: "/next-6.png", alt: "Creative workspace" },
-    { src: "/next-16.png", alt: "Community kitchen" },
+    { src: "/next-1.webp", alt: "Open workspace with natural light" },
+    { src: "/next-12.webp", alt: "Private meeting room" },
+    { src: "/next-2.webp", alt: "Team collaboration area" },
+    { src: "/next-4.webp", alt: "Shared working space" },
+    { src: "/next-7.webp", alt: "Lounge area" },
+    { src: "/next-8.webp", alt: "Personal desk setup" },
+    { src: "/next-9.webp", alt: "Networking event" },
+    { src: "/next-10.webp", alt: "Bright office environment" },
+    { src: "/next-3.webp", alt: "Modern office interior" },
+    { src: "/next-14.webp", alt: "Breakout zone" },
+    { src: "/next-6.webp", alt: "Creative workspace" },
+    { src: "/next-16.webp", alt: "Community kitchen" },
   ];
 
   return (

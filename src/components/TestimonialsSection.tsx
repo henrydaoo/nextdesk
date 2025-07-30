@@ -27,21 +27,21 @@ const TestimonialsSection = () => {
         "NextDesk has transformed the way I work. The community is incredibly supportive, and the facilities are top-notch. Highly recommend!",
       author: "Sarah Chen",
       title: "Freelance Designer",
-      avatar: "/avt1.png",
+      avatar: "/avt1.webp",
     },
     {
       quote:
         "Our startup found the perfect home at NextDesk. Flexible plans, private offices, and a vibrant atmosphere that fuels creativity.",
       author: "David Lee",
       title: "CEO, Innovate Solutions",
-      avatar: "/avt3.png",
+      avatar: "/avt3.webp",
     },
     {
       quote:
         "The best coworking space in the city! The events are fantastic for networking, and the unlimited coffee keeps me going.",
       author: "Maria Garcia",
       title: "Remote Marketing Specialist",
-      avatar: "/avt2.png",
+      avatar: "/avt2.webp",
     },
   ];
 

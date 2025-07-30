@@ -1,3 +1,5 @@
+import React from "react";
+import { scrollToSection } from "@/lib/scrollToSection";
 import { Button } from "@/components/ui/button";
 import {
   Film,
@@ -12,6 +14,12 @@ import {
 import nextDeskLogo from "@/assets/nextdesk-blue.png";
 
 const Footer = () => {
+  const handleFooterNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    scrollToSection(href, undefined, e);
+  };
   const footerSections = [
     {
       title: "Quick Links",
@@ -26,10 +34,10 @@ const Footer = () => {
     {
       title: "Popular Amenities",
       links: [
-        { label: "Private Offices", href: "#" },
-        { label: "Meeting Room Booking", href: "#" },
-        { label: "High-Speed Internet", href: "#" },
-        { label: "Community Events", href: "#" },
+        { label: "Private Offices", href: "#services" },
+        { label: "Meeting Room Booking", href: "#services" },
+        { label: "High-Speed Internet", href: "#services" },
+        { label: "Community Events", href: "#services" },
       ],
     },
     {
@@ -62,9 +70,14 @@ const Footer = () => {
               href="#home"
               className="flex items-center space-x-2 group"
               aria-label="NextDesk Home"
+              onClick={(e) => handleFooterNavClick(e, "#home")}
             >
               <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-                <img src={nextDeskLogo} alt="NextDesk Logo" className="w-7 h-7 object-contain" />
+                <img
+                  src={nextDeskLogo}
+                  alt="NextDesk Logo"
+                  className="w-7 h-7 object-contain"
+                />
               </div>
               <span className="text-2xl font-bold tracking-wide">NextDesk</span>
             </a>
@@ -95,6 +108,7 @@ const Footer = () => {
                     <a
                       href={link.href}
                       className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300"
+                      onClick={(e) => handleFooterNavClick(e, link.href)}
                     >
                       {link.icon && <link.icon className="w-4 h-4" />}
                       <span>{link.label}</span>

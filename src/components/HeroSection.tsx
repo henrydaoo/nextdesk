@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { scrollToSection } from "@/lib/scrollToSection";
 import {
   Carousel,
   CarouselContent,
@@ -24,18 +25,22 @@ const HeroSection = () => {
 
   const heroSlides = [
     {
-      image: "/next-15.png",
+      image: "/next-15.webp",
       alt: "Modern coworking lounge with people collaborating",
     },
     {
-      image: "/next-14.png",
+      image: "/next-14.webp",
       alt: "Open workspace with natural light and desks",
     },
     {
-      image: "/next-13.png",
+      image: "/next-13.webp",
       alt: "Team brainstorming in a meeting room",
     },
   ];
+
+  const handleExploreSpacesClick = () => {
+    scrollToSection("#services");
+  };
 
   return (
     <section
@@ -68,6 +73,7 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               className="hover-scale group border-primary text-primary"
+              onClick={handleExploreSpacesClick}
             >
               <Play
                 size={20}
