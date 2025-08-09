@@ -101,7 +101,7 @@ const Footer = () => {
 
           {footerSections.map((section, sectionIndex) => (
             <div key={sectionIndex} className="space-y-4">
-              <h4 className="text-lg font-semibold">{section.title}</h4>
+              <p className="text-lg font-semibold">{section.title}</p>
               <ul className="space-y-2">
                 {section.links.map((link, linkIndex) => (
                   <li key={linkIndex}>
@@ -123,7 +123,7 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mb-8">
           <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
-              <h4 className="text-lg font-semibold mb-2">Stay Connected</h4>
+              <p className="text-lg font-semibold mb-2">Stay Connected</p>
               <p className="text-gray-300">
                 Subscribe to our newsletter for updates and exclusive offers.
               </p>
