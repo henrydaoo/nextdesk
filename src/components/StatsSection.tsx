@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import { openTidioChat } from "@/lib/openTidioChat";
 import { Users, Building2, UserCheck, Coffee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const StatsSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [counts, setCounts] = useState({
     members: 0,
     locations: 0,
@@ -12,22 +14,13 @@ const StatsSection = () => {
     satisfaction: 0,
   });
 
+  const hasAnimated = useRef(false);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          animateCounters();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("stats");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+    if (inView && !hasAnimated.current) {
+      animateCounters();
+      hasAnimated.current = true;
+    }
+  }, [inView]);
 
   const animateCounters = () => {
     const targets = {
@@ -87,11 +80,10 @@ const StatsSection = () => {
     <section
       id="stats"
       className="py-20 bg-gradient-to-br from-slate-50 to-blue-50"
+      ref={sectionRef}
     >
       <div className="container mx-auto px-4">
-        <div
-          className={`text-center mb-12 fade-in ${isVisible ? "visible" : ""}`}
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Our Impact in Numbers
           </h2>
@@ -100,31 +92,39 @@ const StatsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className={`text-center p-6 bg-white/60 shadow-md rounded-2xl hover-lift fade-in ${
-                isVisible ? "visible" : ""
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-2">
-                <stat.icon className="w-6 h-6 text-primary" />
-              </div>
-              <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                {stat.value.toLocaleString()}
-                {stat.suffix}
-              </div>
-              <div className="text-muted-foreground text-sm">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          className={`text-center fade-in ${isVisible ? "visible" : ""}`}
-          style={{ animationDelay: "400ms" }}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } },
+            hidden: {},
+          }}
         >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, y: 80 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ type: "spring", stiffness: 60, damping: 18 }}
+            >
+              <div className="text-center p-6 bg-white/60 shadow-md rounded-2xl hover-lift">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-2">
+                  <stat.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+                  {stat.value.toLocaleString()}
+                  {stat.suffix}
+                </div>
+                <div className="text-muted-foreground text-sm">{stat.label}</div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="text-center">
           <Button
             size="lg"
             variant="outline"

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useInView, motion } from "framer-motion";
 import { scrollToSection } from "@/lib/scrollToSection";
 import {
   Carousel,
@@ -12,17 +13,8 @@ import { Button } from "./ui/button";
 import { openTidioChat } from "@/lib/openTidioChat";
 
 const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
-  const stats = [
-    { icon: Users, value: "1,200+", label: "Members Joined" },
-    { icon: Building2, value: "10+", label: "Locations" },
-    { icon: UserCheck, value: "99%", label: "Member Satisfaction" },
-  ];
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const heroSlides = [
     {
@@ -39,6 +31,32 @@ const HeroSection = () => {
     },
   ];
 
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const slidesCount = heroSlides.length;
+  const pauseTimeout = useRef<NodeJS.Timeout | null>(null);
+  const emblaApiRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slidesCount);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [slidesCount, isPaused]);
+
+  const handleUserInteraction = () => {
+    setIsPaused(true);
+    if (pauseTimeout.current) clearTimeout(pauseTimeout.current);
+    pauseTimeout.current = setTimeout(() => setIsPaused(false), 4000);
+  };
+
+  const stats = [
+    { icon: Users, value: "1,200+", label: "Members Joined" },
+    { icon: Building2, value: "10+", label: "Locations" },
+    { icon: UserCheck, value: "99%", label: "Member Satisfaction" },
+  ];
+
   const handleExploreSpacesClick = () => {
     scrollToSection("#services");
   };
@@ -47,10 +65,14 @@ const HeroSection = () => {
     <section
       id="home"
       className="relative min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 pt-16"
+      ref={sectionRef}
     >
       <div className="container mx-auto px-4 py-20">
-        <div
-          className={`text-center mb-12 fade-in ${isVisible ? "visible" : ""}`}
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 18 }}
         >
           <div className="inline-block mb-6">
             <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
@@ -83,13 +105,36 @@ const HeroSection = () => {
               Explore Spaces
             </Button>
           </div>
-        </div>
+        </motion.div>
 
-        <div
-          className={`relative fade-in ${isVisible ? "visible" : ""}`}
-          style={{ animationDelay: "200ms" }}
+        <motion.div
+          className="relative"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 18,
+            delay: 0.15,
+          }}
         >
-          <Carousel className="w-full max-w-5xl mx-auto" >
+          <Carousel
+            className="w-full max-w-5xl mx-auto"
+            opts={{ align: "start", loop: true }}
+            setApi={(api) => {
+              if (api) {
+                emblaApiRef.current = api;
+                api.scrollTo(current);
+                api.on && api.on("pointerDown", handleUserInteraction);
+                api.on && api.on("pointerUp", handleUserInteraction);
+                api.on &&
+                  api.on("select", () => {
+                    const idx = api.selectedScrollSnap();
+                    setCurrent(idx);
+                  });
+              }
+            }}
+          >
             <CarouselContent>
               {heroSlides.map((slide, index) => (
                 <CarouselItem key={index}>
@@ -107,13 +152,18 @@ const HeroSection = () => {
             <CarouselPrevious className="left-4" />
             <CarouselNext className="right-4" />
           </Carousel>
-        </div>
+        </motion.div>
 
-        <div
-          className={`grid grid-cols-3 gap-6 pt-16 max-w-2xl mx-auto fade-in ${
-            isVisible ? "visible" : ""
-          }`}
-          style={{ animationDelay: "400ms" }}
+        <motion.div
+          className="grid grid-cols-3 gap-6 pt-16 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 18,
+            delay: 0.3,
+          }}
         >
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
@@ -126,7 +176,7 @@ const HeroSection = () => {
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,24 +1,10 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Shield, Coffee, Users, Sparkles } from "lucide-react";
 
 const CommitmentSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("commitment");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const commitments = [
     {
@@ -52,12 +38,16 @@ const CommitmentSection = () => {
   ];
 
   return (
-    <section
+    <motion.section
       id="commitment"
       className="py-20 bg-gradient-to-br from-slate-50 to-blue-50"
+      ref={sectionRef}
+      initial={{ opacity: 0, y: 80 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ type: "spring", stiffness: 60, damping: 18 }}
     >
       <div className="container mx-auto px-4">
-        <div className={`mb-16 fade-in ${isVisible ? "visible" : ""}`}>
+        <div className={`mb-16`}>
           <div className="flex flex-col items-center justify-center gap-3">
             <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-2">
               <Shield className="w-7 h-7 text-primary" />
@@ -80,10 +70,7 @@ const CommitmentSection = () => {
           {commitments.map((commitment, index) => (
             <div
               key={index}
-              className={`relative p-8 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col gap-4 fade-in ${
-                isVisible ? "visible" : ""
-              }`}
-              style={{ animationDelay: `${index * 120}ms` }}
+              className="relative p-8 bg-white border border-primary/10 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 flex flex-col gap-4"
             >
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center shadow-sm">
@@ -105,7 +92,7 @@ const CommitmentSection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

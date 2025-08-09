@@ -1,27 +1,13 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { useInView, motion } from "framer-motion";
 import { Card } from "./ui/card";
 import { CheckCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import { openTidioChat } from "@/lib/openTidioChat";
 
 const MembershipPlansSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("plans");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const plans = [
     {
@@ -69,10 +55,13 @@ const MembershipPlansSection = () => {
   ];
 
   return (
-    <section id="plans" className="py-20 bg-white">
+    <section id="plans" className="py-20 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <div
-          className={`text-center mb-16 fade-in ${isVisible ? "visible" : ""}`}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 18 }}
         >
           <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             Flexible Membership Options
@@ -84,20 +73,22 @@ const MembershipPlansSection = () => {
             Choose a plan that fits your work style, team size, and budget. No
             hidden fees, just clear value.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div
+          className="grid md:grid-cols-3 gap-8"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 18 }}
+        >
           {plans.map((plan, index) => (
             <Card
               key={index}
-              className={`p-8 rounded-2xl shadow-lg flex flex-col fade-in ${
-                isVisible ? "visible" : ""
-              } ${
+              className={`p-8 rounded-2xl shadow-lg flex flex-col ${
                 plan.highlight
                   ? "bg-primary text-white border-2 border-primary-dark"
                   : "bg-white border border-border"
               }`}
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-center justify-between mb-4">
                 <h3
@@ -167,7 +158,7 @@ const MembershipPlansSection = () => {
               </Button>
             </Card>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,25 +1,11 @@
 import { HelpCircle } from "lucide-react";
 import { Card } from "./ui/card";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { useInView, motion } from "framer-motion";
 
 const FAQSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("faq");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const faqs = [
     {
@@ -53,10 +39,14 @@ const FAQSection = () => {
     <section
       id="faq"
       className="py-20  bg-gradient-to-br from-slate-50 to-blue-50"
+      ref={sectionRef}
     >
       <div className="container mx-auto px-4">
-        <div
-          className={`text-center mb-16 fade-in ${isVisible ? "visible" : ""}`}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 18 }}
         >
           <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             Got Questions?
@@ -67,25 +57,41 @@ const FAQSection = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Find quick answers to the most common questions about NextDesk.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-6">
+        <motion.div
+          className="max-w-3xl mx-auto space-y-6"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.12,
+              },
+            },
+          }}
+        >
           {faqs.map((faq, index) => (
-            <Card
+            <motion.div
               key={index}
-              className={`p-6 bg-white rounded-2xl shadow-md fade-in ${
-                isVisible ? "visible" : ""
-              }`}
-              style={{ animationDelay: `${index * 80}ms` }}
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 60, damping: 18 } },
+              }}
             >
-              <h3 className="text-xl font-semibold text-foreground mb-2 flex items-center">
-                <HelpCircle className="w-6 h-6 text-primary mr-3" />
-                {faq.question}
-              </h3>
-              <p className="text-muted-foreground pl-9">{faq.answer}</p>
-            </Card>
+              <Card
+                className="p-6 bg-white rounded-2xl shadow-md"
+              >
+                <h3 className="text-xl font-semibold text-foreground mb-2 flex items-center">
+                  <HelpCircle className="w-6 h-6 text-primary mr-3" />
+                  {faq.question}
+                </h3>
+                <p className="text-muted-foreground pl-9">{faq.answer}</p>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

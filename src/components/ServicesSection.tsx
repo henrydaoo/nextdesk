@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -16,23 +17,8 @@ import {
 import { openTidioChat } from "@/lib/openTidioChat";
 
 const ServicesSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("services");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const services = [
     {
@@ -94,10 +80,22 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-secondary/30">
+    <section id="services" className="py-20 bg-secondary/30" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <div
-          className={`text-center mb-16 fade-in ${isVisible ? "visible" : ""}`}
+        <motion.div
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            hidden: { opacity: 0, y: 300 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 18,
+            duration: 0.7,
+          }}
+          className={`text-center mb-16`}
         >
           <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             Our Amenities
@@ -109,41 +107,60 @@ const ServicesSection = () => {
             From flexible desks to private offices, we provide a comprehensive
             suite of amenities designed to elevate your work experience.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          variants={{
+            visible: { transition: { staggerChildren: 0.15 } },
+            hidden: {},
+          }}
+        >
           {services.map((service, index) => (
-            <Card
+            <motion.div
               key={index}
-              className={`p-6 hover-lift transition-all duration-300 cursor-pointer fade-in ${
-                isVisible ? "visible" : ""
-              } ${
-                service.featured
-                  ? "bg-primary/10 border border-primary text-primary"
-                  : "bg-white hover:shadow-lg"
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
+              variants={{
+                hidden: { opacity: 0, y: 300 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              transition={{ type: "spring", stiffness: 60, damping: 18 }}
             >
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-primary/10">
-                <service.icon className="w-7 h-7 text-primary" />
-              </div>
-
-              <h3 className="text-xl font-semibold mb-3 text-foreground">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground">{service.description}</p>
-            </Card>
+              <Card
+                className={`p-6 hover-lift transition-all duration-300 cursor-pointer ${
+                  service.featured
+                    ? "bg-primary/10 border border-primary text-primary"
+                    : "bg-white hover:shadow-lg"
+                }`}
+              >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-primary/10">
+                  <service.icon className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-foreground">
+                  {service.title}
+                </h3>
+                <p className="text-muted-foreground">{service.description}</p>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        <div
-          className={`text-center mt-12 fade-in ${isVisible ? "visible" : ""}`}
-          style={{ animationDelay: "600ms" }}
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{
+            type: "spring",
+            stiffness: 60,
+            damping: 18,
+            delay: 0.6,
+          }}
         >
           <Button size="lg" className="hover-scale" onClick={openTidioChat}>
             Join Now
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

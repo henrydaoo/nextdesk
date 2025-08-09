@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
+import { useInView, motion } from "framer-motion";
+import { useRef } from "react";
 
 const GallerySection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("gallery");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRef(null);
+  const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   const images = [
     { src: "/next-1.webp", alt: "Open workspace with natural light" },
@@ -35,10 +21,13 @@ const GallerySection = () => {
   ];
 
   return (
-    <section id="gallery" className="py-20 bg-white">
+    <section id="gallery" className="py-20 bg-white" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <div
-          className={`text-center mb-16 fade-in ${isVisible ? "visible" : ""}`}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 60 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ type: "spring", stiffness: 60, damping: 18 }}
         >
           <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
             Our Spaces
@@ -50,18 +39,30 @@ const GallerySection = () => {
             Explore our thoughtfully designed coworking environments, built for
             comfort, collaboration, and productivity.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {" "}
-          {/* Responsive grid */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+              },
+            },
+            hidden: {},
+          }}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+        >
           {images.map((image, index) => (
-            <div
+            <motion.div
               key={index}
-              className={`relative overflow-hidden rounded-2xl shadow-lg group hover:shadow-xl transition-all duration-300 fade-in ${
-                isVisible ? "visible" : ""
-              }`}
-              style={{ animationDelay: `${index * 80}ms` }}
+              className="relative overflow-hidden rounded-2xl shadow-lg group hover:shadow-xl"
+              variants={{
+                hidden: { opacity: 0, scale: 0.8, y: 40 },
+                visible: { opacity: 1, scale: 1, y: 0 },
+              }}
+              transition={{ type: "spring", stiffness: 60, damping: 18 }}
             >
               <img
                 src={image.src}
@@ -73,9 +74,9 @@ const GallerySection = () => {
                   {image.alt}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
