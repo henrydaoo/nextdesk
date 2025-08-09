@@ -144,6 +144,7 @@ const HeroSection = () => {
                       src={slide.image}
                       alt={slide.alt}
                       className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
+                      fetchPriority="high"
                     />
                   </div>
                 </CarouselItem>
