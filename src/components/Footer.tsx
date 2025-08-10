@@ -11,7 +11,7 @@ import {
   Instagram,
   Linkedin,
 } from "lucide-react";
-import nextDeskLogo from "@/assets/nextdesk-blue.png";
+import nextDeskLogo from "@/assets/nextdesk-blue.png?imagetools";
 
 const Footer = () => {
   const handleFooterNavClick = (

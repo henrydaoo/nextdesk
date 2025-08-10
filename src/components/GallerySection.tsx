@@ -1,23 +1,38 @@
+
 import { useInView, motion } from "framer-motion";
 import { useRef } from "react";
+import img1 from "@/assets/next-1.webp?imagetools";
+import img2 from "@/assets/next-12.webp?imagetools";
+import img3 from "@/assets/next-2.webp?imagetools";
+import img4 from "@/assets/next-4.webp?imagetools";
+import img5 from "@/assets/next-7.webp?imagetools";
+import img6 from "@/assets/next-8.webp?imagetools";
+import img7 from "@/assets/next-9.webp?imagetools";
+import img8 from "@/assets/next-10.webp?imagetools";
+import img9 from "@/assets/next-3.webp?imagetools";
+import img10 from "@/assets/next-14.webp?imagetools";
+import img11 from "@/assets/next-6.webp?imagetools";
+import img12 from "@/assets/next-16.webp?imagetools";
 
 const GallerySection = () => {
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.1 });
 
+
+
   const images = [
-    { src: "/next-1.webp", alt: "Open workspace with natural light" },
-    { src: "/next-12.webp", alt: "Private meeting room" },
-    { src: "/next-2.webp", alt: "Team collaboration area" },
-    { src: "/next-4.webp", alt: "Shared working space" },
-    { src: "/next-7.webp", alt: "Lounge area" },
-    { src: "/next-8.webp", alt: "Personal desk setup" },
-    { src: "/next-9.webp", alt: "Networking event" },
-    { src: "/next-10.webp", alt: "Bright office environment" },
-    { src: "/next-3.webp", alt: "Modern office interior" },
-    { src: "/next-14.webp", alt: "Breakout zone" },
-    { src: "/next-6.webp", alt: "Creative workspace" },
-    { src: "/next-16.webp", alt: "Community kitchen" },
+    { src: img1, alt: "Open workspace with natural light" },
+    { src: img2, alt: "Private meeting room" },
+    { src: img3, alt: "Team collaboration area" },
+    { src: img4, alt: "Shared working space" },
+    { src: img5, alt: "Lounge area" },
+    { src: img6, alt: "Personal desk setup" },
+    { src: img7, alt: "Networking event" },
+    { src: img8, alt: "Bright office environment" },
+    { src: img9, alt: "Modern office interior" },
+    { src: img10, alt: "Breakout zone" },
+    { src: img11, alt: "Creative workspace" },
+    { src: img12, alt: "Community kitchen" },
   ];
 
   return (

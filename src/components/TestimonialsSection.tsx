@@ -1,8 +1,12 @@
+
 import { Quote } from "lucide-react";
 import { Card } from "./ui/card";
 import { useRef, useState, useEffect } from "react";
 import { useInView, motion } from "framer-motion";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import avt1 from "@/assets/avt1.webp?imagetools";
+import avt2 from "@/assets/avt2.webp?imagetools";
+import avt3 from "@/assets/avt3.webp?imagetools";
 
 const testimonials = [
   {
@@ -10,42 +14,42 @@ const testimonials = [
       "NextDesk has transformed the way I work. The community is incredibly supportive, and the facilities are top-notch. Highly recommend!",
     author: "Sarah Chen",
     title: "Freelance Designer",
-    avatar: "/avt1.webp",
+    avatar: avt1,
   },
   {
     quote:
       "Our startup found the perfect home at NextDesk. Flexible plans, private offices, and a vibrant atmosphere that fuels creativity.",
     author: "David Lee",
     title: "CEO, Innovate Solutions",
-    avatar: "/avt3.webp",
+    avatar: avt3,
   },
   {
     quote:
       "The best coworking space in the city! The events are fantastic for networking, and the unlimited coffee keeps me going.",
     author: "Maria Garcia",
     title: "Remote Marketing Specialist",
-    avatar: "/avt2.webp",
+    avatar: avt2,
   },
   {
     quote:
       "NextDesk helped me boost my productivity and connect with inspiring professionals. The environment is perfect for growth.",
     author: "James Carter",
     title: "Business Analyst",
-    avatar: "/avt1.webp",
+    avatar: avt1,
   },
   {
     quote:
       "The flexible plans and modern facilities at NextDesk made it easy for our team to collaborate and innovate every day.",
     author: "Michael Evans",
     title: "Startup Co-Founder",
-    avatar: "/avt3.webp",
+    avatar: avt3,
   },
   {
     quote:
       "I love the vibrant community and the endless coffee! NextDesk is my go-to place for focus and networking.",
     author: "William Smith",
     title: "Marketing Consultant",
-    avatar: "/avt2.webp",
+    avatar: avt2,
   },
 ];
 
