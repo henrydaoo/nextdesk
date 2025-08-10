@@ -3,7 +3,7 @@ import { scrollToSection } from "@/lib/scrollToSection";
 import { Button } from "@/components/ui/button";
 import { openTidioChat } from "@/lib/openTidioChat";
 import { Menu, X, Film, Phone } from "lucide-react";
-import nextDeskLogo from "@/assets/nextdesk-blue.png";
+import nextDeskLogo from "@/assets/nextdesk-blue.png?imagetools";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

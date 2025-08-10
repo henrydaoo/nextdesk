@@ -1,3 +1,7 @@
+import heroImg1 from "@/assets/next-15.webp?imagetools";
+import heroImg2 from "@/assets/next-14.webp?imagetools";
+import heroImg3 from "@/assets/next-13.webp?imagetools";
+
 import { useEffect, useState, useRef } from "react";
 import { useInView, motion } from "framer-motion";
 import { scrollToSection } from "@/lib/scrollToSection";
@@ -18,15 +22,15 @@ const HeroSection = () => {
 
   const heroSlides = [
     {
-      image: "/next-15.webp",
+      image: heroImg1,
       alt: "Modern coworking lounge with people collaborating",
     },
     {
-      image: "/next-14.webp",
+      image: heroImg2,
       alt: "Open workspace with natural light and desks",
     },
     {
-      image: "/next-13.webp",
+      image: heroImg3,
       alt: "Team brainstorming in a meeting room",
     },
   ];
