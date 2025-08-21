@@ -1,28 +1,25 @@
-# NextDesk
-A modern landing page for NextDesk, a coworking space with a built-in chatbot for instant support.
+# NextDesk 🏢
 
-# Technologies
- ReactJS, Typescript, TailwindCSS, Shadcn, Tidio, Motion,  hosted and optimized via Cloudflare CDN.
+**Overview**  
+A modern landing page for NextDesk, a coworking space with an integrated chatbot assistant.
 
-# Features
-The website includes a homepage with core messaging and CTAs, sections for amenities, impact statistics, pricing plans, testimonials, FAQs, and a visual gallery — all designed to showcase the features and benefits of the NextDesk coworking experience. Additionally, a built-in chatbot assistant is available to help users quickly find information, navigate the site, and get support in real time. The site is deployed through Cloudflare for global CDN delivery, fast load times.
+**Tech Stack**  
+- ReactJS, TypeScript, TailwindCSS, Shadcn, Motion, Tidio  
+- Hosted and optimized via Cloudflare CDN
 
+**Key Features**  
+- Homepage with core messaging, calls-to-action, and amenities overview  
+- Sections for pricing plans, testimonials, FAQs, and visual gallery  
+- Built-in chatbot assistant for instant user support  
+- Fully responsive with smooth animations and lightweight interactions  
+- Optimized performance and SEO-ready
 
-<img width="1903" height="1240" alt="nextdeskpreview2" src="https://github.com/user-attachments/assets/feac9f9b-eddc-4348-baaf-a7d00f3d49be" />
+**My Role**  
+Sole Developer – designed and built the landing page, integrated chatbot, implemented responsive UI and animations, and optimized SEO and performance.
 
+**Links**  
+- [Live Demo](https://nextdesk.henrydaoteam.workers.dev/)  
+- [GitHub Repo](https://github.com/henrydaoo/nextdesk)  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+**Screenshots**  
+![NextDesk Preview](https://ik.imagekit.io/henrydaoo/portfolio/projects/thumbnail-4.png?updatedAt=1753694456639)
