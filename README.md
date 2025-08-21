@@ -1,11 +1,12 @@
-# NextDesk 🏢
+# NextDesk 💼 - Coworking Space Landing Page
 
 **Overview**  
 A modern landing page for NextDesk, a coworking space with an integrated chatbot assistant.
 
 **Tech Stack**  
-- ReactJS, TypeScript, TailwindCSS, Shadcn, Motion, Tidio  
-- Hosted and optimized via Cloudflare CDN
+- **Frontend:** ReactJS, TypeScript, TailwindCSS, Shadcn, Motion  
+- **Chatbot:** Tidio  
+- **Hosting/CDN:** Cloudflare
 
 **Key Features**  
 - Homepage with core messaging, calls-to-action, and amenities overview  
