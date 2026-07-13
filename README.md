@@ -22,5 +22,6 @@ Sole Developer – designed and built the landing page, integrated chatbot, impl
 - [Live Demo](https://nextdesk.henrydaoteam.workers.dev/)  
 - [GitHub Repo](https://github.com/henrydaoo/nextdesk)  
 
+
 **Screenshots**  
 ![NextDesk Preview](https://ik.imagekit.io/henrydaoo/portfolio/projects/thumbnail-4.png?updatedAt=1753694456639)
